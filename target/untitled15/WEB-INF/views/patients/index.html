@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+        .header {
+            padding: 80px;
+            text-align: center;
+            background: #63ADD0;
+            color: white;
+        }
+        .header h1 {
+            font-size: 40px;
+        }
+
+        /* Style the top navigation bar */
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        /* Right-aligned link */
+        .navbar a.right {
+            float: right;
+        }
+
+        /* Change color on hover */
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Column container */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Create two unequal columns that sits next to each other */
+        /* Sidebar/left column */
+        .side {
+            flex: 30%;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        /* Main column */
+        .main {
+            flex: 70%;
+            background-color: white;
+            padding: 20px;
+        }
+
+        /* Fake image, just for this example */
+        .fakeimg {
+            background-color: #aaa;
+            width: 100%;
+            padding: 20px;
+        }
+        table {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+            width: 100%;
+            text-align: center;
+            border-collapse: separate;
+            border-spacing: 5px;
+            background: #f1f1f1;
+            border: 16px solid #f1f1f1;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+        th {
+            font-size: 18px;
+            padding: 10px;
+        }
+        td {
+            background: #F5D7BF;
+            padding: 10px;
+        }
+
+        button {
+            background: #63ADD0;
+            font-size:1.2rem;
+            border-radius: 5px;
+        }
+        button:active {
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, .5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>BloodTest</h1>
+    <p>Created by Nikita Sokolovsky.</p>
+</div>
+
+<div class="navbar">
+    <a th:href="${norm}">Normal Results</a>
+    <a th:href="${analys}">Take a blood test</a>
+    <a th:href="${patien}">List of patients</a>
+    <a href="https://www.youtube.com/watch?v=FBZjN8vaXTs" class="right">Pop</a>
+</div>
+
+<div class="row">
+    <div class="side">
+        <h2>About Website</h2>
+        <h5>Some photo of clinic:</h5>
+        <div> <img src="https://st.depositphotos.com/1389715/3133/i/600/depositphotos_31330561-stock-photo-european-luxury-medical-clinic.jpg" style="height:200px;"></div>
+        <p>Website created for workers of hospitals and clinics. It simplifies editing and recording of patient blood test information</p>
+        <h3>Feedback</h3>
+        <p>You can connect with me:<br/>
+            My phone number: +375291782359<br/>
+            Social Network: <a href="https://vk.com/nsokolovsky">VK</a></p>
+    </div>
+    <div class="main">
+        <h2>LIST OF PATIENTS</h2>
+        <table bgcolor="#000000">
+            <tr>
+                <th bgcolor="#63ADD0">Erythrocytes</th>
+                <th bgcolor="#63ADD0">Platelets</th>
+                <th bgcolor="#63ADD0">Leukocytes</th>
+                <th bgcolor="#63ADD0">Hemoglobin</th>
+                <th bgcolor="#63ADD0">Result</th>
+            </tr>
+                <tr>
+                    <td bgcolor="#F3F5EF"><p th:text="${patient.getErythrocytes()}">value</p></td>
+                    <td bgcolor="#F3F5EF"><p th:text="${patient.getPlatelets()}">value</p></td>
+                    <td bgcolor="#F3F5EF"><p th:text="${patient.getLeukocytes()}">value</p></td>
+                    <td bgcolor="#F3F5EF"><p th:text="${patient.getHemoglobin()}">value</p></td>
+                    <td bgcolor="#B1D6E7"><p th:text="${patient.getResult()}">value</p></td>
+                </tr>
+        </table>
+        <a th:href="${patient.Edit()}"><button>Update</button></a></td>
+        <h4><strong>Erythrocytes</strong></h4>
+        An increase in the level of red blood cells in the general blood test most often occurs in the following conditions:
+        <br/>
+        <i>
+            *oxygen starvation of the body;<br/>
+            *transferred dehydration and disturbance of the water-salt balance;<br/>
+            *acquired heart defects, for example, after suffering a severe infectious disease;<br/>
+            *dysfunction of the adrenal cortex;<br/>
+            *erythremia.<br/>
+        </i>
+        A decrease in the level of erythrocytes from the described norm is observed under such conditions:
+        <br/>
+        <i>
+            *Iron-deficiency anemia;<br/>
+            *pregnancy in the 2nd and 3rd trimesters;<br/>
+            *the transferred blood loss and a decrease in the BCC (volume of circulating blood);<br/>
+            *diseases of the red bone marrow;<br/>
+            *chronic inflammatory diseases in the body.
+            <br/>
+        </i>
+        <h4><strong>Hemoglobin</strong></h4>
+        An elevated hemoglobin in a blood test indicates:<br/>
+        <i>
+            *an increased content of platelets in the blood;<br/>
+            *violation of the water-salt balance in the body as a result of prolonged diarrhea or vomiting;<br/>
+            *thickening of the blood due to impaired clotting function;<br/>
+            *overdose of antianemic drugs;<br/>
+            *erythremia.<br/>
+        </i>
+        A decrease in the level of hemoglobin in a blood test indicates such conditions:<br/>
+        <i>
+            *Iron-deficiency anemia;<br/>
+            *internal bleeding;<br/>
+            *oncological neoplasms;<br/>
+            *bone marrow damage;<br/>
+            *kidney disease characterized by impaired function.<br/>
+        </i>
+        <h4><strong>Platelets</strong></h4>
+        Platelets are responsible for normal blood clotting.<br/>
+        A decrease in platelet levels is observed when:
+        <br/>
+        <i>
+            *leukemia;<br/>
+            *AIDS;<br/>
+            *poisoning with alcohol, drugs, chemicals;<br/>
+            *long-term therapy with antibiotics, estrogens, hormonal agents, nitroglycerin, antihistamines;<br/>
+            *aplastic anemia;<br/>
+            *bone marrow diseases.<br/></i>
+        An increase in the level of platelets in a blood test indicates the following possible conditions:
+        <br/><i>
+        *colitis;<br/>
+        *tuberculosis;<br/>
+        *osteomyelitis;<br/>
+        *joint diseases;<br/>
+        *malignant neoplasms;<br/>
+        *cirrhosis of the liver;<br/>
+        *myelofibrosis.<br/>
+    </i>
+        <h4><strong>Leukocytes</strong></h4>
+        An increase in the level of leukocytes in the blood is called leukocytosis, and a decrease in white blood cells is called leukopenia.
+        <br/>
+        leukocytosis is observed when:<br/>
+        <i>
+            *purulent inflammatory diseases;<br/>
+            *received severe burns;<br/>
+            *the use of the hormone insulin;<br/>
+            *malignant tumors in the body;<br/>
+            *epilepsy;<br/>
+            *severe poisoning;<br/>
+            *allergic reactions.<br/>
+        </i>
+        Leukopenia is typical for:
+        <br/><i>
+        *cirrhosis of the liver;<br/>
+        *systemic lupus erythematosus;<br/>
+        *lymphogranulomatosis;<br/>
+        *leukemia;<br/>
+        *bone marrow hypoplasia;<br/>
+        *taking certain medications;<br/>
+        *radiation sickness;<br/>
+        *hepatitis;<br/>
+        *malaria;<br/>
+        *acromegaly;<br/>
+        *measles.<br/>
+    </i>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Page Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+        .header {
+            padding: 80px;
+            text-align: center;
+            background: #63ADD0;
+            color: white;
+        }
+        .header h1 {
+            font-size: 40px;
+        }
+
+        /* Style the top navigation bar */
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        /* Right-aligned link */
+        .navbar a.right {
+            float: right;
+        }
+
+        /* Change color on hover */
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Column container */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        /* Create two unequal columns that sits next to each other */
+        /* Sidebar/left column */
+        .side {
+            flex: 30%;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        /* Main column */
+        .main {
+            flex: 70%;
+            background-color: white;
+            padding: 20px;
+        }
+
+        /* Fake image, just for this example */
+        .fakeimg {
+            background-color: #aaa;
+            width: 100%;
+            padding: 20px;
+        }
+
+        button {
+            background: #63ADD0;
+            font-size:1.2rem;
+
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>BloodTest</h1>
+    <p>Created by Nikita Sokolovsky.</p>
+</div>
+
+<div class="navbar">
+    <a th:href="${norm}">Normal Results</a>
+    <a th:href="${analys}">Take a blood test</a>
+    <a th:href="${patien}">List of patients</a>
+    <a href="https://www.youtube.com/watch?v=FBZjN8vaXTs" class="right">Pop</a>
+</div>
+
+<div class="row">
+    <div class="side">
+        <h2>About Website</h2>
+        <h5>Some photo of clinic:</h5>
+        <div class="fakeimg" style="height:200px;">Image</div>
+        <p>Website created for workers of hospitals and clinics. It simplifies editing and recording of patient blood test information</p>
+        <h3>Feedback</h3>
+        <p>You can connect with me:<br/>
+            My phone number: +375291782359<br/>
+            Social Network: <a href="https://vk.com/nsokolovsky">VK</a></p>
+    </div>
+    <div class="main">
+        <h2>EDIT PATIENT</h2>
+        <form th:method="PATCH" th:action="@{/patients/{id}(id=${patient.getId()})}" th:object="${patient}">
+            <p><label for="firstname">Enter firstname:</label>
+                <input type="text" th:field="*{firstname}" id="firstname"/></p>
+            <p><label for="surname">Enter surname:</label>
+                <input type="text" th:field="*{surname}" id="surname"/></p>
+            <p>
+                <label for="sex">Enter sex:</label>
+                <input type="text" th:field="*{sex}" bgcolor="#FAF0E6" id="sex"/>
+            </p>
+            <p>
+                <label for="age">Enter age:</label>
+                <input type="text" th:field="*{age}" bgcolor="#FAF0E6" id="age"/>
+            </p>
+            <p>
+                <label for="platelets">Enter platelets:</label>
+                <input type="text" th:field="*{platelets}" bgcolor="#FAF0E6" id="platelets"/>
+            </p>
+            <p>
+                <label for="erythrocytes">Enter erythrocytes:</label>
+                <input type="text" th:field="*{erythrocytes}" bgcolor="#FAF0E6" id="erythrocytes"/>
+            </p>
+            <p>
+                <label for="leukocytes">Enter leukocytes:</label>
+                <input type="text" th:field="*{leukocytes}" bgcolor="#FAF0E6" id="leukocytes"/>
+            </p>
+            <p>
+                <label for="hemoglobin">Enter hemoglobin:</label>
+                <input type="text" th:field="*{hemoglobin}" bgcolor="#FAF0E6" id="hemoglobin"/>
+            </p>
+            <input type="submit" value="Update!"/>
+            <br/>
+            <br/>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
